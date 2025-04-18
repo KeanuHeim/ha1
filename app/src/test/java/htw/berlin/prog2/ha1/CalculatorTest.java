@@ -104,5 +104,33 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
+
+    @Test
+    @DisplayName("should do nothing if equals is pressed without prior operation")
+    void testEqualsWithoutOperation() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(3);
+        calc.pressEqualsKey(); // kein Operator vorher
+
+        String expected = "3";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("should not display negative zero")
+    void testNegativeZeroDisplay() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(0);
+        calc.pressNegativeKey();
+
+        String expected = "0";   // Kein "-0", sondern einfach 0
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
 }
 
